@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Семантическая паутина: как интернет научится понимать смысл — мультимедиа-лонгрид</title>
+<meta name="description" content="Мультимедиа-лонгрид о развитии интернет-технологий: цифровая экономика, Индустрия 4.0, Web 3.0, Semantic Web и гейм-индустрия. Текст, инфографика, видео, аудио и анимация.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e4;
+  --paper-deep:#efe8d6;
+  --ink:#211f1a;
+  --ink-soft:#4a463c;
+  --butter:#f2e297;
+  --butter-deep:#e5c84f;
+  --amber:#c9932a;
+  --line:#c9c0a6;
+  --serif-display:'Unbounded',sans-serif;
+  --body:'Manrope',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--butter);color:var(--ink)}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration-color:var(--amber);text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-color .2s ease}
+a:hover{text-decoration-color:var(--ink)}
+a:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* ---------- шапка ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;
+  background:rgba(245,240,228,.88);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .brand{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.topbar .brand b{font-weight:500;color:var(--amber)}
+.read-progress{position:fixed;top:0;left:0;height:3px;background:var(--butter-deep);width:0;z-index:60;transition:width .1s linear}
+.mono-btn{
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  background:none;border:1px solid var(--ink);padding:10px 18px;cursor:pointer;color:var(--ink);
+  transition:background .2s ease,color .2s ease;
+}
+.mono-btn::before{content:"> ";opacity:0;transition:opacity .2s ease}
+.mono-btn:hover{background:var(--butter);border-color:var(--ink)}
+.mono-btn:hover::before{opacity:1}
+
+/* ---------- hero ---------- */
+.hero{padding:130px 28px 0;max-width:1180px;margin:0 auto}
+.hero-label{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:26px}
+.hero-label::before{content:"("}.hero-label::after{content:")"}
+h1{
+  font-family:var(--serif-display);font-weight:800;
+  font-size:clamp(34px,5.6vw,72px);
+  line-height:1.12;letter-spacing:.01em;
+  text-transform:uppercase;
+  max-width:16ch;
+}
+h1 .hl{background:linear-gradient(transparent 62%,var(--butter) 62%)}
+.lede{
+  font-size:clamp(18px,2vw,22px);line-height:1.6;font-weight:500;
+  max-width:56ch;margin-top:34px;color:var(--ink-soft);
+}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:12px 34px;margin-top:36px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+}
+.hero-meta span b{color:var(--ink);font-weight:500}
+.hero-figure{margin:56px auto 0;max-width:1180px;padding:0 28px}
+.hero-figure img{width:100%;border:1px solid var(--line);animation:fadein .5s ease-in-out}
+figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--ink-soft);margin-top:10px;text-transform:uppercase}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* ---------- аудио ---------- */
+.audio-block{
+  max-width:1180px;margin:44px auto 0;padding:0 28px;
+}
+.audio-card{
+  background:var(--butter);border:1px solid var(--ink);
+  padding:20px 24px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+}
+.audio-card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--butter);padding:5px 10px;white-space:nowrap}
+.audio-card .title{font-family:var(--mono);font-size:13px;letter-spacing:.06em;flex:1;min-width:200px}
+.audio-card input[type=range]{flex:2;min-width:160px;accent-color:var(--ink);cursor:pointer}
+.audio-time{font-family:var(--mono);font-size:12px;min-width:86px;text-align:right}
+.audio-play{
+  width:48px;height:48px;border-radius:50%;border:1px solid var(--ink);background:var(--paper);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:transform .2s ease,background .2s ease;
+}
+.audio-play:hover{background:var(--ink)}
+.audio-play:hover svg path{fill:var(--butter)}
+.audio-play svg path{fill:var(--ink);transition:fill .2s ease}
+
+/* ---------- липнущая колонка и содержание ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:250px 1fr;gap:64px}
+.toc-sticky{position:sticky;top:110px;align-self:start;padding-top:72px}
+.toc-title{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:18px}
+.toc{list-style:none}
+.toc li{margin-bottom:4px}
+.toc a{
+  display:flex;align-items:baseline;gap:8px;text-decoration:none;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;line-height:1.5;
+  padding:5px 0;color:var(--ink-soft);transition:color .2s ease;
+}
+.toc a .num{color:var(--amber);flex-shrink:0}
+.toc a .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px);min-width:12px}
+.toc a:hover,.toc a.active{color:var(--ink)}
+.toc a.active .num{color:var(--ink)}
+
+/* ---------- статья ---------- */
+.article{padding-top:72px;min-width:0}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+h2{
+  font-family:var(--serif-display);font-weight:600;text-transform:uppercase;
+  font-size:clamp(24px,3vw,38px);line-height:1.2;letter-spacing:.015em;
+  margin-bottom:8px;
+}
+.h2-sub{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);letter-spacing:.06em;margin-bottom:34px}
+.prose{max-width:70ch}
+.prose p{margin-bottom:1.35em}
+.prose p.lead-para{font-size:19px;font-weight:600;line-height:1.6}
+.prose h3{font-family:var(--body);font-weight:800;font-size:21px;margin:2.2em 0 .9em;letter-spacing:.01em}
+.prose ul,.prose ol{margin:0 0 1.4em 1.3em}
+.prose li{margin-bottom:.6em}
+.prose blockquote{
+  border-left:2px solid var(--butter-deep);padding:6px 0 6px 26px;margin:2em 0;
+  font-size:20px;font-weight:600;line-height:1.55;
+}
+.prose blockquote cite{display:block;font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:12px;font-style:normal}
+.prose .aside{
+  background:var(--paper-deep);border:1px solid var(--line);padding:22px 26px;margin:2em 0;
+  font-size:15.5px;line-height:1.65;
+}
+.aside .aside-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:10px}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:2.4em 0}
+.stat{background:var(--paper);padding:22px 20px}
+.stat .num{font-family:var(--serif-display);font-weight:600;font-size:clamp(26px,2.6vw,36px);line-height:1.1;display:block}
+.stat .num small{font-size:.5em}
+.stat .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-top:10px;line-height:1.5}
+
+/* медиа в тексте */
+figure{margin:2.6em 0}
+figure.wide{margin-left:-40px;margin-right:-40px}
+figure img{border:1px solid var(--line);width:100%}
+.pull-quote{
+  margin:3em 0;padding:34px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  font-family:var(--serif-display);font-weight:600;font-size:clamp(20px,2.4vw,28px);line-height:1.35;text-transform:uppercase;max-width:24ch;
+}
+.pull-quote small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;margin-top:18px;text-transform:none;color:var(--ink-soft)}
+
+/* ссылки-карточки на источники */
+.linkbox{border-top:1px solid var(--ink);margin:2.6em 0 3.4em}
+.linkbox .lb-tag{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);display:block;margin:14px 0 4px}
+.linkbox a.lb{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;text-decoration:none;padding:12px 0;border-bottom:1px dotted var(--line);
+  font-weight:600;font-size:16px;
+}
+.linkbox a.lb::before{content:">";font-family:var(--mono);color:var(--amber);flex-shrink:0;transition:transform .2s ease}
+.linkbox a.lb:hover::before{transform:translateX(4px)}
+.linkbox a.lb small{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-left:auto;text-align:right;flex:0 1 auto;min-width:0;white-space:normal}
+
+/* инфографика */
+.chart-card{border:1px solid var(--line);background:#faf6ec;padding:26px;margin:2.4em 0;overflow:hidden}
+.chart-card canvas{width:100%;height:auto;display:block}
+.chart-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chart-head .ch-title{font-family:var(--serif-display);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.03em}
+.chart-head .ch-src{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* таймлайн web 1-3 */
+.timeline{margin:3em 0;border:1px solid var(--ink);background:#faf6ec}
+.tl-track{display:grid;grid-template-columns:repeat(3,1fr)}
+.tl-cell{padding:26px 24px;border-right:1px dotted var(--line);cursor:pointer;transition:background .25s ease}
+.tl-cell:last-child{border-right:none}
+.tl-cell .tl-era{font-family:var(--serif-display);font-weight:600;font-size:22px;text-transform:uppercase}
+.tl-cell .tl-mode{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin:6px 0 10px}
+.tl-cell p{font-size:14px;line-height:1.6;color:var(--ink-soft)}
+.tl-cell.on{background:var(--butter)}
+.tl-bar{height:6px;background:var(--paper-deep);position:relative}
+.tl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--butter-deep);width:0;transition:width .6s ease}
+.tl-controls{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-top:1px solid var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.tl-controls button{background:none;border:none;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--ink);padding:8px 4px}
+.tl-controls button::before{content:"> ";opacity:0;transition:opacity .2s ease}
+.tl-controls button:hover::before{opacity:1}
+
+/* пирог слоёв semantic web */
+.cake{margin:2.6em 0;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start}
+.cake svg{width:100%;height:auto}
+.cake-list{list-style:none}
+.cake-list li{padding:13px 0;border-bottom:1px dotted var(--line);cursor:pointer;transition:background .2s ease}
+.cake-list li .cl-t{font-family:var(--mono);font-size:13px;letter-spacing:.06em;font-weight:500}
+.cake-list li .cl-d{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-top:4px;display:none}
+.cake-list li.open .cl-d{display:block}
+.cake-list li.open{background:linear-gradient(transparent 55%,var(--butter) 55%)}
+.cake-layer{transition:opacity .25s ease}
+
+/* RDF-песочница */
+.rdf-lab{border:1px solid var(--ink);background:#faf6ec;margin:2.6em 0}
+.rdf-lab .rl-head{padding:16px 22px;border-bottom:1px solid var(--ink);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.rdf-lab .rl-title{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase}
+.rdf-triples{display:flex;flex-wrap:wrap;gap:10px;padding:22px;align-items:center}
+.rdf-group{display:flex;flex-direction:column;gap:8px}
+.rdf-group .rg-label{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);text-align:center}
+.rdf-chip{
+  font-family:var(--mono);font-size:13px;padding:9px 16px;border:1px solid var(--line);background:var(--paper);
+  cursor:pointer;transition:all .2s ease;white-space:nowrap;
+}
+.rdf-chip:hover{border-color:var(--ink)}
+.rdf-chip.sel{background:var(--ink);color:var(--butter);border-color:var(--ink)}
+.rdf-sep{font-family:var(--mono);font-size:18px;color:var(--amber)}
+.rdf-out{padding:0 22px 22px}
+.rdf-out pre{
+  background:var(--ink);color:#efe6c8;padding:20px 22px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.5px;line-height:1.7;white-space:pre-wrap;
+}
+.rdf-out .turtle .k{color:#e5c84f}
+.rdf-out .turtle .s{color:#9fd0a8}
+.rdf-out .turtle .o{color:#a8c4e8}
+
+/* код */
+.codeblock{background:var(--ink);color:#efe6c8;padding:22px 24px;margin:1.8em 0;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.75}
+.codeblock .c{color:#8f8871}
+.codeblock .k{color:#e5c84f}
+.codeblock .a{color:#a8c4e8}
+.codeblock .v{color:#9fd0a8}
+
+/* демо семантической вёрстки */
+.sem-demo{border:1px solid var(--ink);margin:2.6em 0}
+.sem-demo .sd-tabs{display:flex;border-bottom:1px solid var(--ink)}
+.sem-demo .sd-tab{flex:1;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;padding:13px;cursor:pointer;text-align:center;background:var(--paper-deep);transition:background .2s ease}
+.sem-demo .sd-tab.on{background:var(--butter)}
+.sem-demo .sd-body{padding:24px}
+.sd-preview .snippet{border:1px solid var(--line);padding:16px 18px;margin-bottom:12px;font-size:15px;background:#fffef8}
+.sd-preview .snippet .stitle{color:#1a0dab;font-size:18px;font-weight:500}
+.sd-preview .snippet .surl{color:#006621;font-size:12.5px;font-family:var(--mono);margin:2px 0}
+.sd-preview .snippet .sdesc{color:#545454;font-size:13.5px;line-height:1.5}
+.sd-preview .snippet .sstars{color:#e5a823;letter-spacing:2px;font-size:13px}
+.sd-preview .snippet .sprice{font-weight:700}
+
+/* список источников */
+.sources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:34px;margin:2.4em 0}
+.source-col h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:10px;margin-bottom:6px}
+.source-col h4 span{color:var(--amber)}
+.source-col a{display:block;text-decoration:none;padding:11px 0;border-bottom:1px dotted var(--line);font-size:15px;font-weight:600;line-height:1.45}
+.source-col a small{display:block;font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.06em;color:var(--ink-soft);margin-top:4px}
+
+/* выводы */
+.conclusions{counter-reset:conc;margin:2.6em 0}
+.conclusion{
+  display:grid;grid-template-columns:64px 1fr;gap:22px;padding:26px 0;border-top:1px solid var(--ink);
+}
+.conclusion:last-child{border-bottom:1px solid var(--ink)}
+.conclusion::before{
+  counter-increment:conc;content:counter(conc,decimal-leading-zero);
+  font-family:var(--serif-display);font-weight:600;font-size:30px;color:var(--amber);
+}
+.conclusion p{margin:0;font-size:16.5px}
+
+footer{border-top:1px solid var(--ink);margin-top:80px}
+.footer-inner{max-width:1180px;margin:0 auto;padding:44px 28px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-start}
+.footer-inner .f-col{max-width:46ch;font-size:14px;color:var(--ink-soft);line-height:1.7}
+.footer-inner .f-title{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-figure img{animation:none}
+  *{transition-duration:.01ms !important}
+}
+
+/* выдвижная панель */
+.scrim{position:fixed;inset:0;background:rgba(33,31,26,.35);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:80}
+.panel{
+  position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:var(--butter);z-index:90;
+  transform:translateX(102%);transition:transform .38s cubic-bezier(.22,.8,.3,1),visibility 0s linear .38s;
+  padding:34px 34px 34px 30px;overflow-y:auto;border-left:1px solid var(--ink);
+  visibility:hidden;
+}
+.panel.open{transform:translateX(0);visibility:visible;transition:transform .38s cubic-bezier(.22,.8,.3,1),visibility 0s}
+.scrim.open{opacity:1;pointer-events:auto}
+.panel .p-close{background:none;border:1px solid var(--ink);width:42px;height:42px;font-size:18px;cursor:pointer;font-family:var(--mono);transition:background .2s ease}
+.panel .p-close:hover{background:var(--ink);color:var(--butter)}
+.panel .p-title{font-family:var(--serif-display);font-weight:600;font-size:22px;text-transform:uppercase;margin:22px 0 6px}
+.panel .p-sub{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:24px}
+.panel .toc a{font-size:13px;padding:8px 0;color:var(--ink)}
+.panel .toc a .dots{border-color:rgba(33,31,26,.35)}
+.panel .p-foot{margin-top:34px;font-family:var(--mono);font-size:11px;line-height:1.8;color:var(--ink-soft);letter-spacing:.04em}
+
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  .toc-sticky{display:none}
+  .cake{grid-template-columns:1fr}
+  figure.wide{margin-left:0;margin-right:0}
+  .tl-track{grid-template-columns:1fr}
+  .tl-cell{border-right:none;border-bottom:1px dotted var(--line)}
+  .conclusion{grid-template-columns:48px 1fr}
+  .audio-card input[type=range]{flex-basis:100%}
+}
+@media (max-width:480px){
+  body{font-size:16px}
+  .topbar{padding:10px 12px;gap:8px}
+  .topbar .brand{font-size:10px;letter-spacing:.1em;white-space:nowrap}
+  .mono-btn{font-size:10px;letter-spacing:.1em;padding:9px 12px;white-space:nowrap}
+  h1{font-size:clamp(24px,7.2vw,34px);max-width:100%}
+  .hero,.hero-figure,.audio-block,.wrap{padding-left:16px;padding-right:16px}
+  .rdf-triples{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+<body>
+<div class="read-progress" id="readProgress"></div>
+
+<header class="topbar">
+  <a class="brand" href="#top">СТАНКИН<b> / ИДМ-26-01</b></a>
+  <button class="mono-btn" id="openPanel" aria-haspopup="dialog">Содержание</button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<aside class="panel" id="panel" role="dialog" aria-label="Содержание лонгрида" aria-hidden="true">
+  <button class="p-close" id="closePanel" aria-label="Закрыть содержание">×</button>
+  <div class="p-title">Содержание</div>
+  <div class="p-sub">Кликабельная навигация · лонгрид читается 25–30 минут</div>
+  <ol class="toc" id="panelToc"></ol>
+  <div class="p-foot">
+    Лабораторная работа №2<br>
+    Дисциплина «Интернет-технологии»<br>
+    МГТУ «СТАНКИН», Москва, 2026
+  </div>
+</aside>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-label">Лонгрид · Лабораторная работа №2 · на основе материалов ЛР №1</div>
+  <h1>Семантическая паутина: как интернет <span class="hl">научится понимать</span> смысл</h1>
+  <p class="lede">Текст, фотография, видео, инфографика, анимация и аудио о главных направлениях развития современных интернет-технологий: от цифровой экономики и «Индустрии 4.0» до Web 3.0, Semantic Web и цифровой гейм-индустрии.</p>
+  <div class="hero-meta">
+    <span>Автор — <b>Барабаш Аркадий Витальевич</b></span>
+    <span>Группа — <b>ИДМ-26-01</b></span>
+    <span>Проверил — <b>Снопок К.А.</b></span>
+    <span>Формат — <b>мультимедиа-лонгрид</b></span>
+  </div>
+</section>
+
+<figure class="hero-figure">
+  <img src="assets/hero.jpg" alt="Абстрактный граф знаний: светящиеся узлы и тонкие линии связей на тёплой бумажной фактуре" loading="eager">
+  <figcaption>Рис. 0 — Граф знаний: каждый узел — сущность, каждая линия — осмысленная связь. Иллюстрация сгенерирована специально для этого лонгрида</figcaption>
+</figure>
+
+<!-- аудио -->
+<div class="audio-block">
+  <div class="audio-card">
+    <span class="tag">Аудио · 3 мин</span>
+    <span class="title">Слушайте сводку лонгрида, пока читаете</span>
+    <button class="audio-play" id="audioPlay" aria-label="Воспроизвести аудиосводку">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path id="playIcon" d="M3 1.5v13l11-6.5z"/></svg>
+    </button>
+    <input type="range" id="audioSeek" min="0" max="1000" value="0" aria-label="Позиция воспроизведения">
+    <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+    <audio id="narration" src="assets/narration.mp3" preload="metadata"></audio>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- липнущее содержание -->
+  <nav class="toc-sticky" aria-label="Содержание">
+    <div class="toc-title">Содержание</div>
+    <ol class="toc" id="sideToc"></ol>
+  </nav>
+
+  <article class="article" id="article">
+
+<!-- ================= ВСТУПЛЕНИЕ ================= -->
+<section id="intro" class="reveal">
+  <div class="kicker">Пролог</div>
+  <h2>Интернет перестал быть «сетью сетей»</h2>
+  <div class="h2-sub">/ зачем машинам нужен смысл, и почему от этого зависит следующее десятилетие</div>
+  <div class="prose">
+    <p class="lead-para">Ещё двадцать лет назад Интернет был способом передать файл и найти страницу. Сегодня это среда обитания экономики, государства, культуры и — всё чаще — самого человека. Но у этой среды есть странность: она перегружена данными и при этом бедна смыслом. Поисковая система видит слово «ягуар» и не понимает, зверь это, автомобиль или футбольная команда. Человек различает мгновенно. Машина — нет.</p>
+    <p>Этот лонгрид построен на материалах реферата первой лабораторной работы и развивает его в мультимедийном формате. Мы пройдём четыре витка темы. Сначала — посмотрим на цифровую экономику и «Индустрию 4.0» как на почву, на которой выросли современные интернет-технологии. Затем разберёмся, что скрывается за модным ярлыком «Web 3.0», и почему его подлинный фундамент — не криптовалюты, а Семантическая паутина. После этого спустимся на уровень кода: RDF, OWL, SPARQL, JSON-LD, Schema.org — технологии, которые уже сегодня работают на каждой второй странице в выдаче Google. Наконец, покажем, как всё это применяется в одной из самых технологичных отраслей мира — гейм-индустрии, где семантика управляет поведением персонажей, а блокчейн определяет, кому принадлежит цифровой меч.</p>
+    <p>В тексте — цифры исследований Gartner, Newzoo и Grand View Research, ссылки на первоисточники, экспертные статьи и практические кейсы, видеовыступление создателя Всемирной паутины, интерактивные инфографики и аудиосводка. Каждый элемент несёт часть смысла: графики доказывают масштаб, схемы объясняют устройство, видео даёт голос первоисточнику, аудио освобождает глаза, а интерактивные лаборатории позволяют собрать семантический триплет своими руками.</p>
+  </div>
+</section>
+
+<!-- ================= РАЗДЕЛ 1 ================= -->
+<section id="s1" class="reveal">
+  <div class="kicker">Раздел 01</div>
+  <h2>Цифровая экономика и «Индустрия 4.0»</h2>
+  <div class="h2-sub">/ почва, на которой растёт новый интернет</div>
+  <div class="prose">
+    <p class="lead-para">Современный этап развития инфокоммуникационных технологий характеризуется беспрецедентной скоростью проникновения цифровых решений во все сферы жизни. По прогнозу Gartner, мировые расходы на ИТ в 2026 году достигнут 6,37 триллиона долларов — рост на 14,2% за год. При этом аналитики называют строительство вычислительной инфраструктуры для искусственного интеллекта «крупнейшей инфраструктурной задачей в истории человечества».</p>
+    <p>Эти цифры — не абстракция. Они означают, что данные окончательно стали ключевым фактором производства, как в своё время стали нефть, электричество и вычислительная мощность. Цифровая экономика — это система экономических, социальных и культурных отношений, построенная на цифровом представлении информации. Интернет-технологии выступают её катализатором, трансформируя критически важные процессы:</p>
+    <ul>
+      <li><b>государственное управление</b> — электронное правительство сокращает путь услуги до гражданина с недель до минут;</li>
+      <li><b>промышленность и логистика</b> — непрерывный мониторинг оборудования и автоматизация цепей поставок;</li>
+      <li><b>финансовый сектор</b> — распределённые реестры, мгновенные безналичные платежи, алгоритмическая оценка рисков.</li>
+    </ul>
+
+    <div class="stat-row" aria-label="Ключевые цифры мирового ИТ-рынка">
+      <div class="stat"><span class="num" data-count="6.37" data-dec="2">0</span><span class="lbl">трлн $ — мировые расходы на ИТ в 2026 (Gartner)</span></div>
+      <div class="stat"><span class="num" data-count="14.2" data-dec="1">0</span><span class="lbl">% — рост ИТ-расходов за год</span></div>
+      <div class="stat"><span class="num" data-count="822">0</span><span class="lbl">млрд $ — расходы на дата-центры в 2026, +62,5%</span></div>
+      <div class="stat"><span class="num" data-count="3.6" data-dec="1">0</span><span class="lbl">млрд игроков в мире (Newzoo)</span></div>
+    </div>
+  </div>
+
+  <div class="chart-card reveal">
+    <div class="chart-head">
+      <span class="ch-title">Мировые расходы на ИТ по сегментам, млрд $</span>
+      <span class="ch-src">данные: Gartner, июль 2026</span>
+    </div>
+    <canvas id="itChart" width="900" height="420" aria-label="Столбчатая диаграмма расходов на ИТ по сегментам в 2025 и 2026 годах" role="img"></canvas>
+  </div>
+
+  <div class="prose">
+    <p>Обратите внимание на структуру роста: самый стремительно растущий сегмент — дата-центры (+62,5% за год). Это признак того, что экономика перестала потреблять интернет как канал связи и начала потреблять его как вычислительную среду. Облако перестало быть «чужим диском» и стало фабрикой интеллекта.</p>
+
+    <p>В социальном контексте Интернет за те же годы прошёл ещё более глубокую метаморфозу. Он превратился из средства передачи сообщений и поиска информации в ключевое пространство социализации, экономической активности и государственного управления. Формируется «цифровое общество», в котором доступ к качественным интернет-сервисам определяет образовательные и профессиональные возможности человека не меньше, чем доступ к транспорту или электричеству. Пандемийные годы ускорили этот сдвиг: дистанционная работа, онлайн-образование, телемедицина — всё это осталось с нами навсегда.</p>
+    <p>Три инфраструктурных фактора сделали такой сдвиг возможным. <b>5G и оптоволокно</b> подняли пропускную способность сетей на порядок. <b>Удешевление вычислений</b> — от микроконтроллеров за доллар до облачных GPU — перенесло обработку туда, где она дешевле всего. И главное — <b>Big Data</b>: мир генерирует сотни зеттабайт информации в год, и ценность создаётся уже не самими данными, а способностью их связывать и понимать.</p>
+
+    <h3>«Индустрия 4.0»: когда завод обрёл цифрового двойника</h3>
+    <p>Концепция «Индустрия 4.0», или Четвёртой промышленной революции, описывает сквозную автоматизацию производства. Её ключевая идея — объединение физических активов и цифровых систем в киберфизические комплексы (CPS): завод больше не просто механизм, а организм, у которого есть сенсоры (нервы), сеть (кровеносная система) и модель (мозг).</p>
+    <p>Стоит отдельно сказать о термине «революция». Промышленная революция меняла не инструмент, а саму организацию труда: паровая машина породила фабрику, конвейер — массовое производство. Киберфизические системы меняют организацию таким же образом: решение принимается моделью, а не начальником смены; качество контролирует датчик, а не инспектор; планирование ведётся в симуляции, а не по прошлогодним отчётам. Это не модернизация — это смена ролей человека и машины в производственном процессе.</p>
+    <p>Четыре технологии образуют хребет этой концепции. <b>Промышленный интернет вещей (IIoT)</b> — рой датчиков и контроллеров, снимающих телеметрию с оборудования. <b>Цифровые двойники (Digital Twins)</b> — виртуальные копии физических объектов, на которых можно «проиграть» завтрашний день без остановки производства. <b>Облачные и граничные вычисления</b> разделяют роли: критичные по времени решения принимаются на месте (edge), глубокий анализ — в облаке. Наконец, <b>искусственный интеллект и предиктивная аналитика</b> предотвращают аварии до того, как они случатся.</p>
+
+    <div class="aside">
+      <span class="aside-tag">Кейс · Deloitte</span>
+      Промышленный производитель, сталкивавшийся с массовыми гарантийными отказами, построил цифрового двойника, объединив «проектную» и «фактическую» спецификации изделия. Аналитика на двойнике выявила скрытые отклонения в сборке — <b>переделки сократились на 15–20%</b>. В отчёте Deloitte это называется «петлей физический–цифровой–физический»: данные уходят в модель, модель возвращает решение в реальный мир.
+    </div>
+  </div>
+
+  <figure class="wide reveal">
+    <img src="assets/industry.jpg" alt="Изометрическая иллюстрация умного завода с голографическим цифровым двойником производственной линии" loading="lazy">
+    <figcaption>Рис. 1 — Цифровой двойник: физическая линия снизу, её виртуальная копия сверху. Иллюстрация сгенерирована для лонгрида</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Зачем промышленный раздел — в лонгриде об интернет-технологиях? Потому что именно здесь рождается главный запрос эпохи: <b>данных стало так много, что человек уже не способен их интерпретировать без машины, а машина — не способна интерпретировать их без смысла</b>. Цифровой двойник должен «знать», что такое «подшипник», «перегрев» и «норма износа». ИИ-модель должна опираться на факты, а не на догадки. Этот запрос — мост к Семантической паутине. Но сначала разберёмся, как вообще эволюционировал сам веб.</p>
+
+    <div class="linkbox">
+      <span class="lb-tag">Исследования и данные этого раздела</span>
+      <a class="lb" href="https://www.gartner.com/en/newsroom/press-releases/2026-07-27-gartner-forecasts-worldwide-it-spending-to-grow-14-point-2-percent-in-2026-totaling-6-point-37-trillion" target="_blank" rel="noopener">Gartner: мировые расходы на ИТ вырастут на 14,2% в 2026<small>пресс-релиз · июль 2026</small></a>
+      <a class="lb" href="https://eclass.duth.gr/modules/document/file.php/TME242/Industry%204.0/deloitte-cn-cip-industry-4-0-digital-twin-technology-en-171215.pdf" target="_blank" rel="noopener">Deloitte: Industry 4.0 and the digital twin<small>отчёт · Deloitte University Press</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= РАЗДЕЛ 2 ================= -->
+<section id="s2" class="reveal">
+  <div class="kicker">Раздел 02</div>
+  <h2>От Web 1.0 к Web 3.0</h2>
+  <div class="h2-sub">/ read-only, read-write и read-write-own: три жизни интернета</div>
+  <div class="prose">
+    <p class="lead-para">Парадигма веб-технологий прошла путь от эпохи статического контента до эпохи интеллектуальной, машинно-читаемой среды. Условно этот путь делят на три поколения — и полезно увидеть их не как маркетинговые ярлыки, а как ответы на последовательные технологические тупики.</p>
+    <p><b>Web 1.0 («Read-Only», 1990–2004)</b> — интернет брошюр. Страницы писали веб-мастеры, пользователи только читали. Гиперссылка соединяла документы, но не данные: у машины не было никакого способа понять, что на странице написано. Поиск сводился к индексированию слов.</p>
+    <p><b>Web 2.0 («Read-Write», 2004–2020)</b> — интернет платформ. Пользователи стали производителями контента: блоги, соцсети, видеохостинги, wiki. Но у этого бумеранга была оборотная сторона: контент пользователей оказался заперт в силосах корпораций. Данные лежат на серверах платформ, алгоритмы платформ решают, что вы увидите, а перенести свою аудиторию из одной сети в другую невозможно.</p>
+    <p>Само выражение «Web 3.0» появилось ещё до блокчейна: в середине 2000-х им называли именно семантическое видение Бернерсом-Ли — веб, понятный машинам. Лишь около 2020 года ярлык перехватили криптопроекты, и сегодня одно и то же слово в разных текстах означает разное. Поэтому в академическом контексте важно различать: <b>Semantic Web / Web 3.0</b> — инженерную программу связанных данных, и <b>web3</b> — экосистему децентрализованных приложений на блокчейне. Они пересекаются (токены, децентрализованные идентификаторы), но не совпадают.</p>
+    <p><b>Web 3.0 («Read-Write-Own»)</b> — попытка ответить на вопрос: а можно ли сделать интернет, который принадлежит пользователям и понятен машинам? Сдвиг строится на четырёх трендах: семантической паутине, децентрализованных технологиях и блокчейне, искусственном интеллекте и метавселенных с иммерсивными интерфейсами.</p>
+  </div>
+
+  <div class="timeline reveal" id="webTimeline">
+    <div class="tl-track">
+      <div class="tl-cell" data-era="0">
+        <div class="tl-era">Web 1.0</div>
+        <div class="tl-mode">Read-Only</div>
+        <p>Статические страницы, каталоги ссылок, первые поисковики по ключевым словам. Информация связана адресами, а не смыслом.</p>
+      </div>
+      <div class="tl-cell" data-era="1">
+        <div class="tl-era">Web 2.0</div>
+        <div class="tl-mode">Read-Write</div>
+        <p>Платформы и соцсети. Пользователь — производитель контента, но данные заперты в корпоративных силосах.</p>
+      </div>
+      <div class="tl-cell" data-era="2">
+        <div class="tl-era">Web 3.0</div>
+        <div class="tl-mode">Read-Write-Own</div>
+        <p>Машиночитаемые данные, децентрализация, ИИ-агенты. Пользователь владеет данными и активами.</p>
+      </div>
+    </div>
+    <div class="tl-bar"><div class="tl-fill" id="tlFill"></div></div>
+    <div class="tl-controls">
+      <button id="tlPrev" type="button">Назад</button>
+      <span id="tlLabel">Эпоха 1 / 3 — Web 1.0</span>
+      <button id="tlNext" type="button">Дальше</button>
+    </div>
+  </div>
+
+  <div class="prose">
+    <div class="aside">
+      <span class="aside-tag">Важное уточнение</span>
+      В публицистике «Web3» часто отождествляют с криптовалютами и NFT. Технически это лишь один из четырёх трендов — и не самый фундаментальный. Машиночитаемость данных, о которой пойдёт речь дальше, влияет на веб глубже и неизбежнее: она нужна поисковикам, ИИ-ассистентам, медицине, промышленности и играм, независимо от судьбы любого блокчейна.
+    </div>
+    <h3>Четвёртый тренд: пространственные интерфейсы</h3>
+    <p>Метавселенные, AR и VR заслуживают отдельного слова, потому что они меняют не «что» показывает интернет, а «где» он находится. Плоский экран предполагает страницу; шлем дополненной реальности предполагает <b>сцену</b> — с объектами, их положением и свойствами. А описание объектов сцены со свойствами — это буквально предметная область онтологий: у каждого виртуального стула есть геометрия, материал, владелец и поведение при взаимодействии. Индустрия стандартизует это через форматы вроде glTF и набирающего вес USD (Universal Scene Description) — фактически семантические словари для 3D. Чем больше виртуальных миров, тем острее потребность в общем языке их описания — и тем ближе метавселенная к Семантической паутине, чем это принято думать.</p>
+  </div>
+</section>
+
+<!-- ================= РАЗДЕЛ 3 ================= -->
+<section id="s3" class="reveal">
+  <div class="kicker">Раздел 03</div>
+  <h2>Семантическая паутина</h2>
+  <div class="h2-sub">/ идея 2001 года, которая стала инфраструктурой 2020-х</div>
+  <div class="prose">
+    <p class="lead-para">В мае 2001 года создатель Всемирной паутины Тим Бернерс-Ли вместе с Джеймсом Хендлером и Орой Лассилой опубликовал в Scientific American статью «The Semantic Web». В ней была сформулирована концепция сети, в которой информация структурирована так, что её могут понимать и обрабатывать не только люди, но и вычислительные машины.</p>
+    <p>В традиционном вебе документы созданы для визуального восприятия: HTML задаёт отображение — заголовки, абзацы, таблицы. Поиск и агрегация смысла происходят по эвристикам и ключевым словам, то есть по косвенным признакам. Задача Semantic Web — добавить к данным <b>метаданные</b>, описывающие их смысл и связи, превратив веб из «кучи страниц» в распределённую базу данных, работающую по принципу связанных данных (Linked Data).</p>
+
+    <blockquote>
+      «Я мечтаю о паутине, в которой компьютеры способны анализировать все данные в сети — контент, ссылки, транзакции между людьми и компьютерами».
+      <cite>— Тим Бернерс-Ли, «The Semantic Web», Scientific American, май 2001</cite>
+    </blockquote>
+
+    <p>Прогноз 2001 года оказался на удивление точным — просто с опозданием на двадцать лет и в другой одежде. Агенты, которые должны были сами записывать человека к врачу, сегодня существуют в виде ИИ-ассистентов. Но чтобы ассистент мог «понять» страницу, она должна быть размечена. Именно поэтому идея связанных данных пережила все хайповые волны и вошла в инфраструктуру поиска, рекомендаций и генеративного ИИ.</p>
+    <p>Важная веха этого пути — проект <b>DBpedia</b> (2007), извлекший структурированные данные из Википедии и превративший её в RDF-граф, доступный для SPARQL-запросов. За ним пришёл <b>Linked Open Data</b> — облако публичных связанных наборов данных, — а затем <b>Wikidata</b>: свободная база знаний, читаемая людьми и машинами одновременно. Каждая статья Википедии, каждый фильм, город и химический элемент имеют там идентификатор, тип и свойства — то есть онтологическое описание.</p>
+  </div>
+
+  <figure class="wide reveal">
+    <div class="chart-card" style="margin:0">
+      <div class="chart-head">
+        <span class="ch-title">Видео · первоисточник</span>
+        <span class="ch-src">TED2009 · 16 мин</span>
+      </div>
+      <div style="position:relative;padding-top:56.25%;border:1px solid var(--line)">
+        <iframe style="position:absolute;inset:0;width:100%;height:100%" src="https://www.youtube.com/embed/OM6XIICm_qo" title="Тим Бернерс-Ли: следующий веб открытых связанных данных" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <figcaption style="margin-top:10px">Видео 1 — Тим Бернерс-Ли о вебе открытых связанных данных: «что веб сделал для слов, связанные данные сделают для чисел»</figcaption>
+    </div>
+  </figure>
+
+  <div class="prose">
+    <h3>«Пирог» Семантической паутины: семь слоёв</h3>
+    <p>Технологический стек Semantic Web обычно изображают в виде многослойного пирога — каждый слой опирается на предыдущий. Нажимайте на слои и пункты списка: каждый слой раскрывает своё назначение.</p>
+  </div>
+
+  <div class="cake reveal" id="cake">
+    <svg viewBox="0 0 460 400" role="img" aria-label="Схема слоёв семантической паутины">
+      <g font-family="IBM Plex Mono, monospace" font-size="12" text-anchor="middle">
+        <polygon class="cake-layer" data-layer="0" points="230,340 60,300 230,260 400,300" fill="#efe8d6" stroke="#211f1a" stroke-width="1"/>
+        <polygon class="cake-layer" data-layer="1" points="230,290 85,255 230,220 375,255" fill="#e9e0c4" stroke="#211f1a" stroke-width="1"/>
+        <polygon class="cake-layer" data-layer="2" points="230,240 110,210 230,180 350,210" fill="#f2e297" stroke="#211f1a" stroke-width="1"/>
+        <polygon class="cake-layer" data-layer="3" points="230,192 132,167 230,142 328,167" fill="#ecd67a" stroke="#211f1a" stroke-width="1"/>
+        <polygon class="cake-layer" data-layer="4" points="230,146 152,126 230,106 308,126" fill="#e5c84f" stroke="#211f1a" stroke-width="1"/>
+        <polygon class="cake-layer" data-layer="5" points="230,102 168,87 230,72 292,87" fill="#d9b437" stroke="#211f1a" stroke-width="1"/>
+        <polygon class="cake-layer" data-layer="6" points="230,62 182,50 230,38 278,50" fill="#c9932a" stroke="#211f1a" stroke-width="1"/>
+        <text x="230" y="306" fill="#211f1a">Unicode · URI</text>
+        <text x="230" y="261" fill="#211f1a">XML · Turtle</text>
+        <text x="230" y="216" fill="#211f1a">RDF</text>
+        <text x="230" y="170" fill="#211f1a">RDFS</text>
+        <text x="230" y="124" fill="#211f1a">OWL</text>
+        <text x="230" y="88" fill="#211f1a">SPARQL</text>
+        <text x="230" y="53" fill="#f5f0e4">Trust · Proof</text>
+      </g>
+    </svg>
+    <ol class="cake-list" id="cakeList">
+      <li data-layer="0"><span class="cl-t">1 · Unicode и URI</span><div class="cl-d">Глобальная система имён: у каждой вещи, класса и свойства в сети есть уникальный идентификатор — адрес, по которому её можно найти и на который можно сослаться.</div></li>
+      <li data-layer="1"><span class="cl-t">2 · Синтаксис: XML, Turtle, N-Triples</span><div class="cl-d">Способы записать данные «на бумагу»: сериализации, в которых утверждения можно пересылать между системами.</div></li>
+      <li data-layer="2"><span class="cl-t">3 · RDF — модель данных</span><div class="cl-d">Сердце Семантической паутины: любой факт записывается как триплет «субъект — предикат — объект». Набор триплетов образует граф знаний.</div></li>
+      <li data-layer="3"><span class="cl-t">4 · RDFS — базовая схема</span><div class="cl-d">Классы, подклассы, свойства, области определения — первый уровень словаря, которым описываются вещи.</div></li>
+      <li data-layer="4"><span class="cl-t">5 · OWL — язык онтологий</span><div class="cl-d">Богатая логика: эквивалентность классов, кардинальность, транзитивные свойства. Позволяет машинам делать логические выводы (Inference).</div></li>
+      <li data-layer="5"><span class="cl-t">6 · SPARQL — язык запросов</span><div class="cl-d">SQL для графов: выборки по связям между сущностями, а не по таблицам и строкам.</div></li>
+      <li data-layer="6"><span class="cl-t">7 · Trust и Proof</span><div class="cl-d">Верхний слой — доверие и доказательства: откуда факт взят и почему ему можно верить. Именно здесь семантика встречается с блокчейном и верифицируемыми данными.</div></li>
+    </ol>
+  </div>
+
+  <div class="prose">
+    <h3>Стандарты, которые держат всё здание</h3>
+    <p><b>Resource Description Framework (RDF)</b> — базовая модель данных: информация представляется утверждениями из трёх элементов. Пример: «Книга X — имеет автора — Иван Иванов». Простота обманчива: из миллиардов таких атомарных фактов складываются графы знаний Google, Wikidata и корпоративных баз знаний.</p>
+    <p><b>RDF Schema (RDFS) и Web Ontology Language (OWL)</b> — языки описания онтологий: задают классы объектов, иерархии и логические ограничения. OWL позволяет агентам делать выводы: из «все сотрудники — люди» и «Иван — сотрудник» машина логически выводит «Иван — человек» — без единой строчки императивного кода.</p>
+    <p><b>SPARQL</b> — язык запросов к семантическим данным. Если SQL спрашивает таблицу «где», SPARQL спрашивает граф «кто с кем связан и как». Запрос вида «найди все RPG, выпущенные после 2000 года, у которых оценка выше 85» записывается как описание образца графа, а не как перебор строк: вы описываете, как должен выглядеть ответ, и движок сам находит все вхождения этого образца во всём графе.</p>
+    <p><b>JSON-LD</b> — формат сериализации, который встроил семантику в повседневную веб-разработку: семантические данные встраиваются в обычный JSON страницы, не ломая её структуру. Именно JSON-LD сегодня рекомендует Google для микроразметки.</p>
+  </div>
+
+  <!-- RDF-песочница -->
+  <div class="rdf-lab reveal">
+    <div class="rl-head">
+      <span class="rl-title">Интерактив · Соберите RDF-триплет</span>
+      <span class="rl-title" style="color:var(--amber)">субъект → предикат → объект</span>
+    </div>
+    <div class="rdf-triples">
+      <div class="rdf-group">
+        <span class="rg-label">Субъект</span>
+        <button class="rdf-chip" data-slot="s" data-val="&lt;https://example.org/game/Gothic2&gt;">игра «Gothic 2»</button>
+        <button class="rdf-chip" data-slot="s" data-val="&lt;https://example.org/npc/Diego&gt;">NPC Диего</button>
+        <button class="rdf-chip" data-slot="s" data-val="&lt;https://example.org/item/OldSword&gt;">меч «Старий»</button>
+      </div>
+      <span class="rdf-sep">→</span>
+      <div class="rdf-group">
+        <span class="rg-label">Предикат</span>
+        <button class="rdf-chip" data-slot="p" data-val=":hasGenre">:hasGenre</button>
+        <button class="rdf-chip" data-slot="p" data-val=":isLocatedIn">:isLocatedIn</button>
+        <button class="rdf-chip" data-slot="p" data-val=":ownsItem">:ownsItem</button>
+      </div>
+      <span class="rdf-sep">→</span>
+      <div class="rdf-group">
+        <span class="rg-label">Объект</span>
+        <button class="rdf-chip" data-slot="o" data-val="&quot;RPG&quot;">«RPG»</button>
+        <button class="rdf-chip" data-slot="o" data-val="&quot;Old Camp&quot;">«Старый лагерь»</button>
+        <button class="rdf-chip" data-slot="o" data-val=":RustyBlade">:RustyBlade</button>
+      </div>
+    </div>
+    <div class="rdf-out">
+      <pre class="turtle" id="turtleOut"><span class="c"># выберите субъект, предикат и объект —
+# а Turtle-код сгенерируется автоматически</span></pre>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Заметьте: триплеты не знают границ баз данных. URI <code style="font-family:var(--mono);font-size:.9em">:ownsItem</code> может определяться в одной онтологии, использоваться в чужом графе и запрашиваться третьим сервисом через SPARQL. Это и есть принцип связанных данных: публикация, связывание, переиспользование.</p>
+    <p>Надстройкой служат правила вывода. Если в онтологии записано, что «владелец меча — воин фракции» и «воин фракции имеет доступ к казармам», то система выводит: владелец меча имеет доступ к казармам — даже если этот факт никто не вводил явно. Такие цепочки inference работают за счёт логики OWL и превращают граф из хранилища фактов в машину рассуждений. Именно поэтому граф знаний ценнее суммы его записей.</p>
+
+    <div class="linkbox">
+      <span class="lb-tag">Исследования и первоисточники этого раздела</span>
+      <a class="lb" href="https://www.lassila.org/publications/2001/SciAm.html" target="_blank" rel="noopener">Berners-Lee, Hendler, Lassila — «The Semantic Web», Scientific American, 2001<small>первоисточник концепции</small></a>
+      <a class="lb" href="https://www.w3.org/TR/rdf11-concepts/" target="_blank" rel="noopener">W3C — RDF 1.1 Concepts and Abstract Syntax<small>стандарт · рекомендация W3C</small></a>
+      <a class="lb" href="https://www.w3.org/TR/owl2-overview/" target="_blank" rel="noopener">W3C — OWL 2 Web Ontology Language<small>стандарт · рекомендация W3C</small></a>
+      <a class="lb" href="https://www.w3.org/TR/sparql11-query/" target="_blank" rel="noopener">W3C — SPARQL 1.1 Query Language<small>стандарт · рекомендация W3C</small></a>
+    </div>
+  </div>
+</section>
+<!-- ================= РАЗДЕЛ 4 ================= -->
+<section id="s4" class="reveal">
+  <div class="kicker">Раздел 04</div>
+  <h2>Семантическая вёрстка</h2>
+  <div class="h2-sub">/ как смысл дошёл до обычных веб-страниц</div>
+  <div class="prose">
+    <p class="lead-para">Семантика оказалась настолько нужна, что спустилась с уровня научных графов на уровень повседневной вёрстки. Сегодня она живёт в каждой приличной веб-странице — просто мы её не замечаем.</p>
+    <h3>HTML5: страница, которую можно «прочитать» машиной</h3>
+    <p>Элементы <code style="font-family:var(--mono);font-size:.9em">&lt;article&gt;</code>, <code style="font-family:var(--mono);font-size:.9em">&lt;nav&gt;</code>, <code style="font-family:var(--mono);font-size:.9em">&lt;header&gt;</code>, <code style="font-family:var(--mono);font-size:.9em">&lt;footer&gt;</code>, <code style="font-family:var(--mono);font-size:.9em">&lt;aside&gt;</code> заменили безликие <code style="font-family:var(--mono);font-size:.9em">&lt;div&gt;</code>. Снаружи страница выглядит так же, но для поискового робота и скринридера она превращается в документ с явной структурой: где главный текст, где навигация, где врезка. Доступность — прямой плод семантики: скринридер читает <code style="font-family:var(--mono);font-size:.9em">&lt;nav&gt;</code> как «навигация», а <code style="font-family:var(--mono);font-size:.9em">&lt;article&gt;</code> — как «основной материал».</p>
+    <p>Для иллюстрации сравним подходы вёрстки одного и того же блока. В «бессемантичной» версии робот видит просто вложенные блоки и сам гадает, что есть что:</p>
+    <div class="codeblock" aria-label="Пример несемантической вёрстки">
+<span class="c">&lt;!-- вёрстка без семантики: смысл угадывается --&gt;</span>
+&lt;<span class="k">div</span> class=<span class="v">"wrap"</span>&gt;
+  &lt;<span class="k">div</span> class=<span class="v">"head"</span>&gt;Заголовок новости&lt;/<span class="k">div</span>&gt;
+  &lt;<span class="k">div</span> class=<span class="v">"text"</span>&gt;Текст новости…&lt;/<span class="k">div</span>&gt;
+&lt;/<span class="k">div</span>&gt;
+
+<span class="c">&lt;!-- семантическая вёрстка: смысл объявлен явно --&gt;</span>
+&lt;<span class="k">article</span>&gt;
+  &lt;<span class="k">header</span>&gt;&lt;<span class="k">h1</span>&gt;Заголовок новости&lt;/<span class="k">h1</span>&gt;&lt;/<span class="k">header</span>&gt;
+  &lt;<span class="k">p</span>&gt;Текст новости…&lt;/<span class="k">p</span>&gt;
+&lt;/<span class="k">article</span>&gt;</div>
+    <p>Разница кажется косметической, пока дело не доходит до машин: парсер новостных агрегаторов, читалка, поисковый робот — все они получают второй вариант «в готовом виде», не прибегая к угадыванию по именам CSS-классов.</p>
+    <h3>Schema.org: словарь, на котором договорились конкуренты</h3>
+    <p>В 2011 году Google, Yahoo, Bing (а позже и «Яндекс») совместно создали словарь Schema.org — унифицированный набор типов для описания сущностей: товаров, статей, персон, событий, рецептов, отзывов. Историческое достижение: ведущие поисковые системы, конкурирующие за каждый процент рынка, договорились об общем языке описания данных. Такой консенсус в IT почти не имеет прецедентов.</p>
+    <p>Микроразметка внедряется тремя способами: <b>Microdata</b> и <b>RDFa</b> размечают видимые теги страницы, а <b>JSON-LD</b> — блок внутри страницы, который Google рекомендует как основной: он не размечает отображение, а описывает сущности отдельным слоем.</p>
+  </div>
+
+  <div class="codeblock" aria-label="Пример микроразметки JSON-LD">
+<span class="c">&lt;script type="application/ld+json"&gt;</span>
+{
+  <span class="a">"@context"</span>: <span class="v">"https://schema.org"</span>,
+  <span class="a">"@type"</span>: <span class="v">"Article"</span>,
+  <span class="a">"headline"</span>: <span class="v">"Семантическая паутина: как интернет научится понимать смысл"</span>,
+  <span class="a">"author"</span>: { <span class="a">"@type"</span>: <span class="v">"Person"</span>, <span class="a">"name"</span>: <span class="v">"Барабаш Аркадий"</span> },
+  <span class="a">"publisher"</span>: { <span class="a">"@type"</span>: <span class="v">"CollegeOrUniversity"</span>, <span class="a">"name"</span>: <span class="v">"МГТУ «СТАНКИН»"</span> }
+}
+<span class="c">&lt;/script&gt;</span>
+  </div>
+
+  <div class="prose">
+    <h3>Расширенные сниппеты: семантика как конкурентное преимущество</h3>
+    <p>Размеченная страница получает шанс на <b>rich snippet</b> — расширенный результат с рейтингом, ценой, датой, изображением. Эксперименты SEO-индустрии показывают рост кликабельности на 25–40% у страниц с корректной микроразметкой. Переключите вкладки, чтобы увидеть разницу между обычной и размеченной выдачей.</p>
+  </div>
+
+  <div class="sem-demo reveal" id="semDemo">
+    <div class="sd-tabs" role="tablist">
+      <button class="sd-tab on" data-tab="plain" role="tab" aria-selected="true">Без семантики</button>
+      <button class="sd-tab" data-tab="rich" role="tab" aria-selected="false">С микроразметкой</button>
+    </div>
+    <div class="sd-body sd-preview">
+      <div class="snippet" data-pane="plain">
+        <div class="stitle">Купить меч «Старий» — интернет-магазин</div>
+        <div class="surl">https://shop.example/.../old-sword</div>
+        <div class="sdesc">Оружие в игре. Цены, наличие. Доставка по Хоринису.</div>
+      </div>
+      <div class="snippet" data-pane="rich" hidden>
+        <div class="stitle">Купить меч «Старий» — от 120 золотых</div>
+        <div class="surl">https://shop.example/.../old-sword</div>
+        <div class="sstars" aria-label="Рейтинг 4,8 из 5">★★★★★ <span style="color:#545454">4,8 · 2 314 отзывов</span></div>
+        <div class="sdesc"><span class="sprice">120 зол.</span> · В наличии · RPG-товары · Доставка по Хоринису</div>
+      </div>
+      <p style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)">Одна и та же страница в поисковой выдаче: слева — «глухая», справа — размеченная типом Product</p>
+    </div>
+  </div>
+
+  <div class="prose">
+    <div class="aside">
+      <span class="aside-tag">Экспертная практика</span>
+      По данным исследования SE Ranking, около <b>65% страниц, цитируемых режимом Google AI, и 71% страниц, цитируемых ChatGPT</b>, используют schema-разметку. Структурированные данные стали базовым сигналом надёжности для ИИ-поиска: машине проще цитировать то, что машинно же и описано.
+    </div>
+    <p>Инструменты валидации — обязательный этап работы: <b>Rich Results Test</b> от Google показывает, какие расширенные результаты способна породить разметка, а валидатор Schema.org проверяет корректность любых RDF-данных страницы. Практический цикл внедрения прост: выбрать подходящие типы словаря, разметить страницу, проверить валидатором, опубликовать и следить за отчётами Search Console. Всё это — работа одного-двух дней, а эффект в виде роста кликабельности и представимости в ИИ-поиске накапливается годами.</p>
+
+    <div class="linkbox">
+      <span class="lb-tag">Экспертные статьи и кейсы этого раздела</span>
+      <a class="lb" href="https://seranking.com/blog/structured-data/" target="_blank" rel="noopener">SE Ranking — Structured Data for SEO and LLMs<small>экспертная статья · 2026</small></a>
+      <a class="lb" href="https://www.lumar.io/blog/best-practice/serp-content-using-structured-data-to-drive-more-organic-traffic/" target="_blank" rel="noopener">Lumar — Using Structured Data to Drive More Organic Traffic<small>экспертная статья</small></a>
+      <a class="lb" href="https://contentgecko.io/blog/structured-schema-markup/" target="_blank" rel="noopener">ContentGecko — кейсы роста CTR на 25–35% после внедрения разметки<small>практические кейсы</small></a>
+      <a class="lb" href="https://schema.org/" target="_blank" rel="noopener">Schema.org — официальный словарь микроразметки<small>спецификация</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= РАЗДЕЛ 5 ================= -->
+<section id="s5" class="reveal">
+  <div class="kicker">Раздел 05</div>
+  <h2>Семантика × Искусственный интеллект</h2>
+  <div class="h2-sub">/ почему графы знаний лечат «галлюцинации»</div>
+  <div class="prose">
+    <p class="lead-para">Языковые модели гениально оперируют вероятностями слов, но не знают фактов. Онтологии и графы знаний содержат факты, но не умеют говорить. Соединение этих двух миров — одна из главных инженерных задач десятилетия.</p>
+    <p>Граф знаний (Knowledge Graph) — это RDF-представление фактов о мире: сущности, их классы, свойства и отношения. Google запустил свой Knowledge Graph в 2012 году с полумиллиардом сущностей; сегодня подобные графы — стандарт де-факто у поисковиков, банков, фармы и промышленности. Граф отвечает на вопрос «что связано с чем и как именно» — то, что нейросеть может только угадывать.</p>
+    <p>Отсюда — технология <b>Retrieval-Augmented Generation (RAG)</b> и её семантический вариант: сначала система извлекает верифицированные факты из графа знаний или онтологии, затем передаёт их языковой модели как контекст. Модель формулирует, граф гарантирует. В медицинских, юридических и промышленных применениях это разница между полезным инструментом и дорогим генератором уверенной ошибки.</p>
+
+    <blockquote>
+      Граф знаний не заменяет нейросеть. Он ставит ей границы — так, как карта ставит границы путешественнику, а не заменяет ему ноги.
+      <cite>— обобщённая формулировка подхода Neuro-Symbolic AI</cite>
+    </blockquote>
+
+    <h3>Нейросимволический подход</h3>
+    <p>Исследовательское направление <b>Neuro-Symbolic AI</b> ставит задачу прямо: соединить обучение нейросетей с логическим выводом онтологий. За пределами игр это уже индустриальная практика. Фармацевтические компании соединяют графы знаний о белках, болезнях и препаратах с языковыми моделями для поиска молекул-кандидатов. Банки ведут графы контрагентов и транзакций, в которых модель расследования отмывания получает структурированный контекст вместо сырого текста. Промышленность описывает оборудование онтологиями, чтобы ИИ-помощник не выдумывал регламенты, а извлекал их из проверенного справочника. Во всех этих случаях схема одна: <b>граф — источник истины, модель — интерфейс к нему</b>. Практические следствия уже видны в потребительских продуктах:</p>
+    <ul>
+      <li><b>поисковые агенты</b> отвечают на многошаговые вопросы («найди игру в жанре RPG дешевле тысячи рублей с рейтингом выше 4,5, выпущенную после 2020-го»), раскладывая их на SPARQL-подобные подзапросы к графу;</li>
+      <li><b>ИИ-ассистенты</b> цитируют размеченные страницы чаще — структурированные данные снижают «семантическую нагрузку» на интерпретацию;</li>
+      <li><b>верифицируемость</b>: каждый факт из графа имеет URI-происхождение, которое можно проверить — в отличие от «внутреннего убеждения» языковой модели.</li>
+    </ul>
+
+    <div class="stat-row" aria-label="Структурированные данные и ИИ-поиск">
+      <div class="stat"><span class="num" data-count="65">0</span><span class="lbl">% страниц, цитируемых Google AI Mode, имеют schema-разметку</span></div>
+      <div class="stat"><span class="num" data-count="71">0</span><span class="lbl">% страниц, цитируемых ChatGPT, используют schema-разметку</span></div>
+      <div class="stat"><span class="num" data-count="500" data-suffix=" млн+">0</span><span class="lbl">сущностей в Google Knowledge Graph на момент запуска (2012)</span></div>
+    </div>
+
+    <p>Для студента-разработчика вывод практический: семантическая разметка — это уже не «SEO-фишка», а <b>интерфейс взаимодействия с ИИ-средой</b>. Страница, описанная на языке машин, доступна не только людям, но и агентам, которые всё чаще являются посредниками между контентом и аудиторией.</p>
+
+    <figure>
+      <img src="assets/semantic-book.jpg" alt="Открытая книга на столе, из страниц которой поднимается объёмная сеть связанных узлов" loading="lazy">
+      <figcaption>Рис. 2 — Текст превращается в связанные данные: иллюстрация к разделу о графах знаний. Сгенерирована для лонгрида</figcaption>
+    </figure>
+
+    <div class="linkbox">
+      <span class="lb-tag">Исследования этого раздела</span>
+      <a class="lb" href="https://www.knowledgegraphnavigator.com/concepts/semantic-web/" target="_blank" rel="noopener">Knowledge Graph Navigator — The Semantic Web Explained<small>исследование · обзор стека и истории</small></a>
+      <a class="lb" href="https://seranking.com/blog/structured-data/" target="_blank" rel="noopener">SE Ranking — доля размеченных страниц среди источников ИИ-поиска<small>исследование · 2026</small></a>
+    </div>
+  </div>
+</section>
+<!-- ================= РАЗДЕЛ 6 ================= -->
+<section id="s6" class="reveal">
+  <div class="kicker">Раздел 06</div>
+  <h2>Гейм-индустрия как полигон Web 3.0</h2>
+  <div class="h2-sub">/ самая технологичная развлекательная отрасль мира</div>
+  <div class="prose">
+    <p class="lead-para">Если хотите увидеть интернет-технологии завтрашнего дня — смотрите на игры. Гейм-индустрия обслуживает 3,6 миллиарда игроков и генерирует выручку более 200 миллиардов долларов в год, сопоставимую с мировым рынком музыки и кино вместе взятыми.</p>
+    <p>По данным Grand View Research, объём мирового рынка видеоигр в 2025 году оценивался в 322,6 миллиарда долларов (широкая методология, включая hardware), а по оценке Newzoo только программные и внутриигровые доходы впервые превысили 200 миллиардов. Методологии расходятся — но сходятся в главном: игры растут быстрее почти всех медиарынков, и рост сосредоточен в Азиатско-Тихоокеанском регионе (около половины мировой выручки) и в мобильном сегменте (более 50% доходов).</p>
+    <p>Гейминг перестал быть автономным развлечением. Игра превратилась в <b>сервисную платформу</b> (Games-as-a-Service): десятилетиями живущие миры, сезонный контент, внутриигровые экономики с собственными биржами и инфляцией. Именно поэтому индустрия так чувствительна к каждому из трендов Web 3.0: ей нужны и масштабируемые облака, и ИИ, и владение цифровыми активами, и — да — смысловая структура контента.</p>
+    <p>Соседние отрасли усиливают эффект. Киберспорт вырос в медиабизнес со зрительской аудиторией в сотни миллионов человек, а стриминг превратил прохождение в жанр развлекательного контента. Игры конкурируют уже не с другими играми, а с соцсетями и видеосервисами за часы внимания пользователя. Отсюда — гонка за персонализацией, живыми событиями и социальными механиками, а значит, и за всеми технологиями, которые делают массовую персонализацию возможной: данные, ИИ, семантика.</p>
+  </div>
+
+  <div class="chart-card reveal">
+    <div class="chart-head">
+      <span class="ch-title">Рынок видеоигр: динамика и прогноз, млрд $</span>
+      <span class="ch-src">данные: Grand View Research · Newzoo</span>
+    </div>
+    <canvas id="gameChart" width="900" height="400" aria-label="Диаграмма роста мирового рынка видеоигр с 2025 по 2033 год" role="img"></canvas>
+  </div>
+
+  <div class="prose">
+    <h3>Семантика заходит в игру</h3>
+    <p>Внедрение ИТ Web 3.0 в видеоигры открывает принципиально новые возможности, и семантические технологии здесь — не украшение, а рабочий инструмент.</p>
+    <p><b>Семантическое управление контентом и знаниями.</b> Игровой мир — это миллионы сущностей со связями: квесты зависят от фракций, предметы — от рецептов, NPC — от отношений. Онтологическая модель описывает эти связи явно. На этом строятся динамические квестовые движки, которые адаптируют сюжет под действия игрока, и базы лоров, доступные для запросов («какие персонажи знают о падении Барьера?»).</p>
+    <p><b>Поведенческий ИИ для NPC.</b> Классический NPC помнит три фразы. NPC на графе знаний «помнит» всё: к кому он расположен, что видел, какие слухи дошли до его лагеря. Исследователи давно предлагают описывать игровые миры онтологиями — от ранних работ по геймификации Semantic Web до современных онтологий вроде <b>VideOWL</b>, моделирующей видеоигровую среду средствами OWL.</p>
+    <p><b>Интеллектуальные процедурные миры.</b> Генеративный ИИ создаёт диалоги, текстуры и предметы, но делает это вслепую, если не знать правил мира. Онтология задаёт правила: в этой вселенной драконы не торгуют рыбой. Генерация поверх онтологии — это контролируемая генерация.</p>
+    <p><b>Интероперабельность метавселенных.</b> Семантические стандарты позволяют описывать цифровые активы — аватаров, предметы, земли — так, чтобы их свойства распознавались разными движками и мирами. Плащ, купленный в одной игре, теоретически может «пониматься» в другой, если обе говорят на одном словаре.</p>
+  </div>
+
+  <figure class="wide reveal">
+    <img src="assets/gaming.jpg" alt="Игрок на летающем острове держит светящийся цифровой артефакт на фоне огромного виртуального мира" loading="lazy">
+    <figcaption>Рис. 3 — Метавселенная с собственной экономикой: игрок и его цифровой актив. Иллюстрация сгенерирована для лонгрида</figcaption>
+  </figure>
+
+  <div class="prose">
+    <h3>Облако, edge и ИИ: инфраструктура больших миров</h3>
+    <p>Сервисная модель игр невозможна без инфраструктурной триады. <b>Облачный гейминг</b> переносит рендеринг на сервер — игра запускается на телефоне, вычисляется в дата-центре, 5G-связь доставляет картинку с задержкой, приемлемой для геймплея. Практическое следствие: барьер входа в «большие» игры падает — больше не нужна видеокарта за тысячу долларов, чтобы играть в проекты уровня ААА. <b>Граничные вычисления</b> ставят матчмейкинг и физику ближе к игроку: в соревновательных играх каждая миллисекунда — деньги, а региональный сервер дешевле потерянной аудитории. <b>ИИ-пайплайны</b> занимаются античитом, модерацией голоса, персонализацией событий и — всё активнее — генерацией контента под контролем дизайнеров.</p>
+    <p>Отдельного внимания заслуживает смена экономики труда в отрасли. Процедурная генерация «на классике» (караваны в No Man's Sky, подземелья roguelike-игр) заменяла ручной труд алгоритмами. Генеративный ИИ добавляет к этому тексты, озвучку, концепт-арт и анимацию — и вопрос уже не «заменит ли ИИ художника», а «как перестроить пайплайн, чтобы один художник вёл три проекта». Споры об авторских правах на обучающие данные и о ценности «ручного» контента — закономерная боль переходного периода, а не его конец.</p>
+    <p>И именно здесь обнаруживается скрытая потребность в семантике: модерация, поиск по контенту, рекомендации и античит работают наилучшим образом, когда игровые сущности описаны структурированно. Тег «это оружие ближнего боя редкого класса» — это уже мини-онтология. Игровые студии фактически выращивают свои графы знаний, даже не называя их так.</p>
+
+    <div class="aside">
+      <span class="aside-tag">Исследовательский кейс · VideOWL</span>
+      В работе «Modeling the Video Game Environment: the VideOWL Ontology» (CEUR Workshop Proceedings) видеоигровая среда описывается онтологией на OWL: игровые объекты, их свойства, отношения и правила становятся машиночитаемыми. Это прямой мост между Semantic Web и игровым дизайном: мир, который можно не только играть, но и логически рассуждать о нём.
+    </div>
+
+    <div class="linkbox">
+      <span class="lb-tag">Данные и исследования этого раздела</span>
+      <a class="lb" href="https://www.grandviewresearch.com/industry-analysis/video-game-market" target="_blank" rel="noopener">Grand View Research — Video Game Market Report 2026–2033<small>исследование рынка</small></a>
+      <a class="lb" href="https://ceur-ws.org/Vol-3579/paper15.pdf" target="_blank" rel="noopener">VideOWL — онтология видеоигровой среды<small>научная статья · CEUR</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= РАЗДЕЛ 7 ================= -->
+<section id="s7" class="reveal">
+  <div class="kicker">Раздел 07</div>
+  <h2>Play-to-Earn и Play-to-Own</h2>
+  <div class="h2-sub">/ когда игровые предметы стали собственностью</div>
+  <div class="prose">
+    <p class="lead-para">Парадигма Web 3.0 изменила сам статус игрока. В Web 2.0 он — арендатор: лицензионное соглашение разрешает «использование» скина, а закрытие сервера обнуляет коллекцию. В моделях Play-to-Earn и Play-to-Own игрок становится владельцем.</p>
+    <p><b>Play-to-Earn (P2E)</b> предложил играть ради дохода: игровые действия приносят токены, которые можно продать. В пике популярности в некоторых странах доход от таких игр сопоставляли с локальными зарплатами, и игра превращалась в работу — отсюда и критика, и массовость. <b>Play-to-Own (P2O)</b> — более трезвая эволюция: акцент не на заработке, а на подлинном владении предметами, персонажами и землёй, подтверждённом токенизацией (NFT) и распределённым реестром. Децентрализованные приложения и смарт-контракты обеспечивают прозрачность игровых экономик: разработчик технически не может произвольно изъять или подделать предмет.</p>
+    <p>Важно понимать разницу этих моделей с правовой стороны. В Web 2.0 отношения регулируются лицензионным соглашением: вы «приобретаете право использования», которое издатель может отозвать в одностороннем порядке — при бане, закрытии проекта или смене политики. В P2O владение фиксируется в реестре, не контролируемом издателем. Это не отменяет правил игры (читерство всё равно карается), но меняет баланс сил: игрок перестаёт быть арендатором без договора.</p>
+    <h3>Урок Axie Infinity</h3>
+    <p>Главный учебник по P2E написан не учёными, а экономикой. Axie Infinity — коллекционная игра на блокчейне, в которой пиковые оценки экосистемы достигали десятков миллиардов долларов, а доходы игроков из развивающихся стран (Филиппины, Венесуэла) на время сравнивали с местными зарплатами. Затем экономика рухнула за считанные недели.</p>
+    <p>Разборы инцидента сходятся в диагнозе: экономика строилась как <b>пирамида</b>. Приток новых игроков оплачивал вывод прибыли старых; «краны» (награды) не имели достаточных «сливов» (расходов). Когда приток новых вкладчиков замедлился, маховик пошёл в обратную сторону. Авторитетное резюме исследователя геймификации Ю-Кая Чоу формулирует простой тест: <b>может ли новый игрок получать удовольствие, не платя старым?</b> Если нет — это не экономика, а финансовая пирамида.</p>
+
+    <blockquote>
+      Каждая внутриигровая экономика живёт по законам кранов и сливов. Когда краны превышают сливы, наступает инфляция — и игроки замечают это раньше, чем разработчики.
+      <cite>— Yukaichou, «Why Axie Infinity Collapsed»</cite>
+    </blockquote>
+
+    <p>Практические выводы для индустрии оказались ценнее самого хайпа. Зрелые проекты сегодня проектируют экономики с «трением»: крафт расходует ресурсы, предметы изнашиваются, комиссии сжигаются. Play-to-Own эволюционирует в <b>Play-and-Own</b>: сначала игра, потом собственность. Экономика служит игре, а не наоборот. И здесь снова нужна семантика: чтобы предмет «понимался» в разных мирах, его описание должно быть стандартизировано — та самая интероперабельность из раздела о метавселенных.</p>
+    <p>Горизонт направления шире игровых предметов. Та же инфраструктура позволяет закреплять за игроком <b>верифицируемую репутацию</b>: достижения, рейтинги, историю турниров — всё, что сегодня живёт в закрытых профилях платформ. Децентрализованные идентификаторы (DID) и проверяемые учётные данные (verifiable credentials) — прямые наследники семантических стандартов описания сущностей. В перспективе игрок получает портативную личность: репутация, нажитая в одном мире, подтверждает опыт в другом.</p>
+    <p>Стоит признать и ограничения модели. Пропускная способность блокчейнов и комиссии за транзакции пока плохо совместимы с микроэкономикой массовых игр; регуляторы разных стран трактуют игровые токены неоднозначно; а экологические и этические вопросы энергопотребления ранних сетей до сих пор тенью ложатся на репутацию всего направления. Реалистичный прогноз — не «всё станет блокчейном», а гибрид: основная масса операций останется в быстрых централизованных системах, а распределённый реестр будет заниматься тем, для чего он действительно нужен, — подтверждением права собственности и межплатформенной переносимостью.</p>
+
+    <div class="linkbox">
+      <span class="lb-tag">Практический кейс этого раздела</span>
+      <a class="lb" href="https://yukaichou.com/gamification-study/economy-design-framework-axie-infinity-collapse/" target="_blank" rel="noopener">Yukaichou — почему рухнула Axie Infinity: рамка проектирования экономики<small>кейс · экспертный разбор</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ВЫВОДЫ ================= -->
+<section id="concl" class="reveal">
+  <div class="kicker">Эпилог</div>
+  <h2>Выводы</h2>
+  <div class="h2-sub">/ что осталось после всех разделов</div>
+  <div class="prose">
+    <p class="lead-para">Проведённый в лабораторных работах №1–2 анализ позволяет сформулировать выводы, которые опираются не на модные прогнозы, а на проверяемые данные и работающие технологии.</p>
+  </div>
+  <div class="conclusions">
+    <div class="conclusion reveal"><p><b>Развитие Semantic Web — не усовершенствование вёрстки, а необходимый шаг к машиночитаемому интернету.</b> Данные Gartner показывают: экономика уже потребляет вычисления триллионами долларов, и человечество физически не способно интерпретировать потоки данных без посредничества машин. Машины же не могут интерпретировать данные без смысла. Семантика — это «компилятор» между миром данных и миром знаний.</p></div>
+    <div class="conclusion reveal"><p><b>Стандарты RDF, OWL, SPARQL, JSON-LD и Schema.org формируют фундамент информационных пространств нового поколения.</b> Они уже сегодня работают в поиске, в разметке каждой второй коммерческой страницы и в графах знаний, которым доверяют генеративные модели. Вопрос не в том, приживётся ли стек, а в том, кто научится использовать его раньше конкурентов.</p></div>
+    <div class="conclusion reveal"><p><b>В гейм-индустрии наиболее значимы технологии Semantic Web, ИИ/ML и децентрализации.</b> Семантика структурирует игровые миры и делает поведение персонажей осмысленным, ИИ генерирует контент и аналитику, децентрализованные реестры подтверждают право собственности на цифровые активы. Кейс Axie Infinity доказал: экономика без «сливов» — пирамида, но сама модель владения (Play-to-Own) после переработки остаётся устойчивой.</p></div>
+    <div class="conclusion reveal"><p><b>Синергия семантических технологий и цифровых развлечений задаёт вектор развития метавселенных.</b> Виртуальные миры будущего станут связными (одни стандарты описания), экономически обоснованными (устойчивые внутренние экономики) и интерактивными (ИИ-персонажи с памятью и мотивацией). Индустрия с выручкой в 200+ миллиардов долларов — это не развлечение; это исследовательский полигон всей цифровой экономики.</p></div>
+  </div>
+
+  <div class="pull-quote reveal">
+    Интернет, который понимает смысл, начинается не с нейросети. Он начинается с триплета: субъект — предикат — объект.
+    <small>формула всего лонгрида</small>
+  </div>
+</section>
+
+<!-- ================= ИСТОЧНИКИ ================= -->
+<section id="sources" class="reveal">
+  <div class="kicker">Архив ссылок</div>
+  <h2>Исследования · статьи · кейсы</h2>
+  <div class="h2-sub">/ все внешние источники лонгрида одним списком</div>
+  <div class="sources-grid">
+    <div class="source-col">
+      <h4><span>01 /</span> Исследования и данные</h4>
+      <a href="https://www.gartner.com/en/newsroom/press-releases/2026-07-27-gartner-forecasts-worldwide-it-spending-to-grow-14-point-2-percent-in-2026-totaling-6-point-37-trillion" target="_blank" rel="noopener">Gartner — Worldwide IT Spending Forecast 2026<small>gartner.com · июль 2026</small></a>
+      <a href="https://www.grandviewresearch.com/industry-analysis/video-game-market" target="_blank" rel="noopener">Grand View Research — Video Game Market 2026–2033<small>grandviewresearch.com</small></a>
+      <a href="https://www.lassila.org/publications/2001/SciAm.html" target="_blank" rel="noopener">Berners-Lee et al. — The Semantic Web, Scientific American 2001<small>lassila.org</small></a>
+      <a href="https://www.knowledgegraphnavigator.com/concepts/semantic-web/" target="_blank" rel="noopener">The Semantic Web Explained: Linked Data to Knowledge Graphs<small>knowledgegraphnavigator.com</small></a>
+      <a href="https://ceur-ws.org/Vol-3579/paper15.pdf" target="_blank" rel="noopener">VideOWL — онтология видеоигровой среды<small>ceur-ws.org · PDF</small></a>
+      <a href="https://eclass.duth.gr/modules/document/file.php/TME242/Industry%204.0/deloitte-cn-cip-industry-4.0-digital-twin-technology-en-171215.pdf" target="_blank" rel="noopener">Deloitte — Industry 4.0 and the Digital Twin<small>PDF · Deloitte University Press</small></a>
+    </div>
+    <div class="source-col">
+      <h4><span>02 /</span> Стандарты и спецификации</h4>
+      <a href="https://www.w3.org/TR/rdf11-concepts/" target="_blank" rel="noopener">W3C — RDF 1.1 Concepts<small>w3.org/TR</small></a>
+      <a href="https://www.w3.org/TR/owl2-overview/" target="_blank" rel="noopener">W3C — OWL 2 Overview<small>w3.org/TR</small></a>
+      <a href="https://www.w3.org/TR/sparql11-query/" target="_blank" rel="noopener">W3C — SPARQL 1.1 Query<small>w3.org/TR</small></a>
+      <a href="https://schema.org/" target="_blank" rel="noopener">Schema.org — словарь микроразметки<small>schema.org</small></a>
+      <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Google — Rich Results Test<small>инструмент проверки разметки</small></a>
+    </div>
+    <div class="source-col">
+      <h4><span>03 /</span> Экспертные статьи и кейсы</h4>
+      <a href="https://seranking.com/blog/structured-data/" target="_blank" rel="noopener">SE Ranking — Structured Data for SEO and LLMs<small>экспертная статья · 2026</small></a>
+      <a href="https://www.lumar.io/blog/best-practice/serp-content-using-structured-data-to-drive-more-organic-traffic/" target="_blank" rel="noopener">Lumar — Structured Data to Drive Organic Traffic<small>экспертная статья</small></a>
+      <a href="https://contentgecko.io/blog/structured-schema-markup/" target="_blank" rel="noopener">ContentGecko — кейсы внедрения schema-разметки<small>кейсы · рост CTR 25–35%</small></a>
+      <a href="https://yukaichou.com/gamification-study/economy-design-framework-axie-infinity-collapse/" target="_blank" rel="noopener">Yukaichou — разбор краха Axie Infinity<small>кейс · экономика игр</small></a>
+      <a href="https://www.youtube.com/watch?v=OM6XIICm_qo" target="_blank" rel="noopener">TED — Тим Бернерс-Ли о связанных данных<small>видео · 2009</small></a>
+    </div>
+  </div>
+</section>
+</article>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="f-col">
+      <div class="f-title">О работе</div>
+      Мультимедиа-лонгрид подготовлен в рамках лабораторной работы №2 по дисциплине «Интернет-технологии» на основе материалов ЛР №1. ФГАОУ ВО «МГТУ «СТАНКИН», Институт информационных технологий, кафедра информационных систем. Направление 09.04.01 «Информатика и вычислительная техника». Москва, 2026.
+    </div>
+    <div class="f-col">
+      <div class="f-title">Использованные медиа</div>
+      Иллюстрации сгенерированы нейросетью специально для этого материала. Аудио-сводка синтезирована из текста лонгрида. Видео — выступление Тима Бернерсом-Ли на TED2009. Инфографика построена на данных Gartner, Grand View Research и Newzoo. Страница готова к публикации на GitHub Pages.
+    </div>
+  </div>
+</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- данные содержания ---------- */
+var TOC = [
+  ["intro","Пролог"],
+  ["s1","01 · Цифровая экономика и Индустрия 4.0"],
+  ["s2","02 · От Web 1.0 к Web 3.0"],
+  ["s3","03 · Семантическая паутина"],
+  ["s4","04 · Семантическая вёрстка"],
+  ["s5","05 · Семантика × ИИ"],
+  ["s6","06 · Гейм-индустрия как полигон Web 3.0"],
+  ["s7","07 · Play-to-Earn и Play-to-Own"],
+  ["concl","Выводы"],
+  ["sources","Источники"]
+];
+function buildToc(el){
+  TOC.forEach(function(item,i){
+    var li=document.createElement('li');
+    var a=document.createElement('a');
+    a.href='#'+item[0];
+    var n=document.createElement('span');n.className='num';
+    n.textContent=(i===0||i>=TOC.length-2)?'—':String(i).padStart(2,'0');
+    var t=document.createElement('span');t.textContent=item[1].replace(/^0\d · /,'');
+    var d=document.createElement('span');d.className='dots';
+    a.appendChild(n);a.appendChild(t);a.appendChild(d);
+    li.appendChild(a);el.appendChild(li);
+  });
+}
+buildToc(document.getElementById('sideToc'));
+buildToc(document.getElementById('panelToc'));
+
+/* ---------- выдвижная панель ---------- */
+var panel=document.getElementById('panel'), scrim=document.getElementById('scrim');
+function openPanel(){panel.classList.add('open');scrim.classList.add('open');panel.setAttribute('aria-hidden','false');}
+function closePanel(){panel.classList.remove('open');scrim.classList.remove('open');panel.setAttribute('aria-hidden','true');}
+document.getElementById('openPanel').addEventListener('click',openPanel);
+document.getElementById('closePanel').addEventListener('click',closePanel);
+scrim.addEventListener('click',closePanel);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePanel();});
+panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closePanel);});
+
+/* ---------- прогресс чтения ---------- */
+var prog=document.getElementById('readProgress');
+function onScrollProg(){
+  var h=document.documentElement;
+  var p=h.scrollTop/(h.scrollHeight-h.clientHeight);
+  prog.style.width=(p*100).toFixed(2)+'%';
+}
+document.addEventListener('scroll',onScrollProg,{passive:true});onScrollProg();
+
+/* ---------- reveal ---------- */
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+/* ---------- scrollspy ---------- */
+var tocLinks=document.querySelectorAll('#sideToc a');
+var secs=TOC.map(function(t){return document.getElementById(t[0]);});
+var spy=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){
+      tocLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id);});
+    }
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+secs.forEach(function(s){if(s)spy.observe(s);});
+
+/* ---------- счётчики ---------- */
+var cio=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(!en.isIntersecting)return;
+    cio.unobserve(en.target);
+    var el=en.target,target=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||'0',10),suf=el.dataset.suffix||'';
+    if(reduced){el.textContent=target.toFixed(dec).replace('.',',')+suf;return;}
+    var t0=performance.now(),dur=1200;
+    (function tick(now){
+      var k=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-k,3);
+      el.textContent=(target*e).toFixed(dec).replace('.',',')+suf;
+      if(k<1)requestAnimationFrame(tick);
+    })(t0);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+
+/* ---------- диаграммы ---------- */
+function setupCanvas(cv){
+  var dpr=window.devicePixelRatio||1;
+  var r=cv.getBoundingClientRect();
+  cv.width=r.width*dpr;cv.height=r.width*(cv.getAttribute('height')/cv.getAttribute('width'))*dpr;
+  cv.style.height='auto';
+  var ctx=cv.getContext('2d');ctx.scale(dpr,dpr);
+  return {ctx:ctx,w:r.width,h:r.width*(cv.getAttribute('height')/cv.getAttribute('width'))};
+}
+var ink='#211f1a',soft='#4a463c',line='#c9c0a6',butter='#e5c84f',paper='#f5f0e4',mono='"IBM Plex Mono",monospace',disp='"Unbounded",sans-serif';
+
+var itData=[
+  ['Дата-центры',506,822],['Устройства',790,868],['ПО',1271,1468],
+  ['Сервисы',1492,1570],['IaaS',222,287],['Связь',1296,1354]
+];
+var gameData=[['2025',322.6],['2026',351.6],['2028',389],['2030',431],['2033',498]];
+
+function drawBarChart(cv,data,opts){
+  var s=setupCanvas(cv),ctx=s.ctx,W=s.w,H=s.h;
+  ctx.clearRect(0,0,W,H);
+  var pad={l:8,r:8,t:30,b:44};
+  var plotW=W-pad.l-pad.r,plotH=H-pad.t-pad.b;
+  var max=opts.max;
+  // сетка
+  ctx.strokeStyle=line;ctx.lineWidth=1;ctx.setLineDash([2,4]);
+  for(var g=0;g<=4;g++){
+    var y=pad.t+plotH-plotH*g/4;
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  var groups=data.length,bw=Math.min(34,plotW/(groups*2.6));
+  var step=plotW/groups;
+  data.forEach(function(d,i){
+    var cx=pad.l+step*i+step/2;
+    var vals=opts.two?d.slice(1):[d[1]];
+    vals.forEach(function(v,j){
+      var bh=plotH*v/max;
+      var x=cx-(vals.length*bw+(vals.length-1)*6)/2+j*(bw+6);
+      ctx.fillStyle=(opts.two&&j===0)?line:(opts.two?'#211f1a':'#211f1a');
+      if(!opts.two){ctx.fillStyle=i===data.length-1?butter:'#d9cfae';}
+      else{ctx.fillStyle=j===0?'#d9cfae':'#c9932a';}
+      ctx.fillRect(x,pad.t+plotH-bh,bw,bh);
+      ctx.fillStyle=soft;ctx.font='10px '+mono;ctx.textAlign='center';
+      ctx.fillText(v.toLocaleString('ru-RU'),x+bw/2,pad.t+plotH-bh-6);
+    });
+    ctx.fillStyle=ink;ctx.font='11px '+mono;ctx.textAlign='center';
+    var lbl=d[0];
+    if(ctx.measureText(lbl).width>step-8){
+      var words=lbl.split(' ');var mid=Math.ceil(words.length/2);
+      lbl=[words.slice(0,mid).join(' '),words.slice(mid).join(' ')];
+    }
+    if(Array.isArray(lbl)){ctx.fillText(lbl[0],cx,H-28);ctx.fillText(lbl[1],cx,H-14);}
+    else ctx.fillText(lbl,cx,H-20);
+  });
+  // легенда
+  if(opts.two){
+    ctx.textAlign='left';ctx.font='10.5px '+mono;
+    ctx.fillStyle='#d9cfae';ctx.fillRect(pad.l,6,12,12);
+    ctx.fillStyle=ink;ctx.fillText('2025',pad.l+18,16);
+    ctx.fillStyle='#c9932a';ctx.fillRect(pad.l+70,6,12,12);
+    ctx.fillStyle=ink;ctx.fillText('2026 (прогноз)',pad.l+88,16);
+    ctx.fillStyle=soft;ctx.textAlign='right';
+    ctx.fillText('млрд $, по оси Y — до 850',W-pad.r,16);
+  }else{
+    ctx.fillStyle=soft;ctx.font='10.5px '+mono;ctx.textAlign='right';
+    ctx.fillText('млрд $ · CAGR 5,1%',W-pad.r,16);
+  }
+}
+var itCv=document.getElementById('itChart'),gameCv=document.getElementById('gameChart');
+var chartsDrawn=false;
+function drawAll(){
+  if(itCv)drawBarChart(itCv,itData,{two:true,max:900});
+  if(gameCv)drawBarChart(gameCv,gameData,{two:false,max:560});
+}
+var cio2=new IntersectionObserver(function(en){
+  en.forEach(function(e){if(e.isIntersecting&&!chartsDrawn){chartsDrawn=true;drawAll();cio2.disconnect();}});
+},{threshold:.2});
+if(itCv)cio2.observe(itCv);
+window.addEventListener('resize',function(){if(chartsDrawn)drawAll();});
+
+/* ---------- таймлайн ---------- */
+var era=0,cells=document.querySelectorAll('.tl-cell'),tlFill=document.getElementById('tlFill'),tlLabel=document.getElementById('tlLabel');
+var eraNames=['Web 1.0','Web 2.0','Web 3.0'];
+function setEra(n){
+  era=Math.max(0,Math.min(2,n));
+  cells.forEach(function(c,i){c.classList.toggle('on',i===era);});
+  tlFill.style.width=((era+1)/3*100)+'%';
+  tlLabel.textContent='Эпоха '+(era+1)+' / 3 — '+eraNames[era];
+}
+document.getElementById('tlPrev').addEventListener('click',function(){setEra(era-1);});
+document.getElementById('tlNext').addEventListener('click',function(){setEra(era+1);});
+cells.forEach(function(c,i){c.addEventListener('click',function(){setEra(i);});});
+setEra(0);
+
+/* ---------- пирог слоёв ---------- */
+var cakeItems=document.querySelectorAll('#cakeList li'),cakeLayers=document.querySelectorAll('.cake-layer');
+cakeItems.forEach(function(li){
+  li.addEventListener('click',function(){
+    var idx=li.dataset.layer,was=li.classList.contains('open');
+    cakeItems.forEach(function(x){x.classList.remove('open');});
+    cakeLayers.forEach(function(l){l.style.opacity=.35;});
+    if(!was){li.classList.add('open');var L=document.querySelector('.cake-layer[data-layer="'+idx+'"]');if(L)L.style.opacity=1;}
+  });
+});
+
+/* ---------- RDF-песочница ---------- */
+var sel={s:null,p:null,o:null};
+var out=document.getElementById('turtleOut');
+document.querySelectorAll('.rdf-chip').forEach(function(ch){
+  ch.addEventListener('click',function(){
+    var slot=ch.dataset.slot;
+    document.querySelectorAll('.rdf-chip[data-slot="'+slot+'"]').forEach(function(x){x.classList.remove('sel');});
+    ch.classList.add('sel');
+    sel[slot]=ch.dataset.val;
+    if(sel.s&&sel.p&&sel.o){
+      out.innerHTML='<span class="k">@prefix</span> : &lt;https://example.org/vocab#&gt; .\n\n'
+        +'<span class="s">'+sel.s+'</span>\n    <span class="k">'+sel.p+'</span> <span class="o">'+sel.o+'</span> .\n\n'
+        +'<span class="c"># машиночитаемый факт готов:\n# его можно положить в граф знаний и запросить через SPARQL</span>';
+    }else{
+      out.innerHTML='<span class="c"># выберите оставшиеся части триплета…</span>';
+    }
+  });
+});
+
+/* ---------- демо сниппетов ---------- */
+var tabs=document.querySelectorAll('#semDemo .sd-tab'),panes=document.querySelectorAll('#semDemo [data-pane]');
+tabs.forEach(function(t){
+  t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');});
+    panes.forEach(function(p){p.hidden=p.dataset.pane!==t.dataset.tab;});
+    t.classList.add('on');t.setAttribute('aria-selected','true');
+  });
+});
+
+/* ---------- аудиоплеер ---------- */
+var audio=document.getElementById('narration'),playBtn=document.getElementById('audioPlay'),
+    icon=document.getElementById('playIcon'),seek=document.getElementById('audioSeek'),timeEl=document.getElementById('audioTime');
+function fmt(t){if(!isFinite(t))return'0:00';var m=Math.floor(t/60),s=Math.floor(t%60);return m+':'+String(s).padStart(2,'0');}
+function refreshTime(){timeEl.textContent=fmt(audio.currentTime)+' / '+fmt(audio.duration);}
+playBtn.addEventListener('click',function(){
+  if(audio.paused){audio.play();}else{audio.pause();}
+});
+audio.addEventListener('play',function(){icon.setAttribute('d','M3 2h4v12H3zM9 2h4v12H9z');});
+audio.addEventListener('pause',function(){icon.setAttribute('d','M3 1.5v13l11-6.5z');});
+audio.addEventListener('loadedmetadata',refreshTime);
+audio.addEventListener('timeupdate',function(){
+  refreshTime();
+  if(audio.duration)seek.value=Math.round(audio.currentTime/audio.duration*1000);
+});
+seek.addEventListener('input',function(){
+  if(audio.duration)audio.currentTime=seek.value/1000*audio.duration;
+});
+})();
+</script>
+</body>
+</html>
